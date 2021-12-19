@@ -5,11 +5,14 @@
         "node": true
     },
     "extends": [
+        "prettier",
         "airbnb-base"
     ],
     "parserOptions": {
         "ecmaVersion": 13
     },
+    "plugin": ["prettier"],
     "rules": {
+        "prettier/prettier": "error"
     }
 }
