@@ -9,7 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "lint-staged": {
+    "src/*": "eslint"
+  },
   "devDependencies": {
-    "eslint": "^8.5.0"
+    "eslint": "^8.5.0",
+    "lint-staged": "^12.1.3"
   }
 }
