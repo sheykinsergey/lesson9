@@ -9,9 +9,9 @@
         "airbnb-base"
     ],
     "parserOptions": {
-        "ecmaVersion": 13
+        "ecmaVersion": 2018
     },
-    "plugin": ["prettier"],
+    "plugins": ["prettier"],
     "rules": {
         "prettier/prettier": "error"
     }
