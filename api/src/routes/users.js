@@ -11,14 +11,14 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
 
-    const userId = req.params.id
-    await db.select().from('users').where('id', userId);
+    const userId = req.params.id;
+    const user = await db.select().from('users').where({'id': userId});
     
-    res.send('Single record Ok');
+    res.send(user);
 });
 
 router.post('/', async (req, res) => {
-  
+
     const addUser = req.body.name;
     await db('users').insert({name: addUser})
 
@@ -31,7 +31,6 @@ router.put('/:id', async (req, res) => {
     const editName = req.query.name;
 
     await db('users').where({id: editUserId}).update({name: editName})
-  
 
     res.send(`Update id ${editUserId} to ${editName} Ok`);
 });
