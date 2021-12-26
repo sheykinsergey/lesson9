@@ -4,6 +4,7 @@ const db = require('../services/db');
 router.get('/', async (req, res) => {
 
     const limit = req.query.limit;
+    
     const list = await db.select().from('users').orderBy('id').limit(limit);
 
     res.send(list);
@@ -11,8 +12,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
 
-    const userId = req.params.id;
-    const user = await db.select().from('users').where({'id': userId});
+    const userid = req.params.id;
+
+    const user = await db.select().from('users').where({'id': userid});
     
     res.send(user);
 });
@@ -20,6 +22,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
 
     const addUser = req.body.name;
+
     await db('users').insert({name: addUser})
 
     res.send(`add name ${addUser}`);
@@ -38,6 +41,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 
     const delUser = req.params.id;
+
     await db('users').where({id: delUser}).del();
 
     res.send('Delete Ok');

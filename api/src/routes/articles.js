@@ -4,6 +4,7 @@ const db = require('../services/db');
 router.get('/', async (req, res) => {
 
     const limit = req.query.limit;
+
     const list = await db.select().from('articles').orderBy('id').limit(limit);
 
     res.send(list);
@@ -12,17 +13,20 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 
     const articleId = req.params.id;
-    const post = await db('articles').where('id', articleId);
 
-    res.send(post)
+    const post = await db.select().from('articles').where('id', articleId);
+
+    res.send(post);
 });
 
 router.post('/', async (req, res) => {
 
     const textPost = req.body.text;
-    await db('articles').insert({text: textPost})
+    const userid = req.body.userid;
 
-    res.send(`add post: ${textPost}`)
+    await db('articles').insert({text: textPost, userid: userid});
+
+    res.send(`add post: ${textPost}`);
 });
 
 router.put('/:id', async (req, res) => {
@@ -38,6 +42,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 
     const delPost = req.params.id;
+    
     await db('articles').where({id: delPost}).del();
 
     res.send('Delete Ok');
