@@ -26,7 +26,7 @@ function App() {
     <div className="App">
 
       <header className="App-header">
-        <Header showArticles={showArticles} showAddArticle={showAddArticle} showProfile={showProfile} setPage={setPage} />
+        <Header showArticles={showArticles} showAddArticle={showAddArticle} showProfile={showProfile} />
       </header>
 
       <div className="App-body">
