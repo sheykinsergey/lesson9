@@ -3,49 +3,64 @@ const db = require('../services/db');
 
 router.get('/', async (req, res) => {
 
-    const limit = req.query.limit;
+	const articles = await db.select().from('articles').orderBy('id');
 
-    const list = await db.select().from('articles').orderBy('id').limit(limit);
-
-    res.send(list);
+	res.status(200).json(articles);
 });
 
 router.get('/:id', async (req, res) => {
 
-    const articleId = req.params.id;
+	const article = await db
+		.select()
+		.from('articles')
+		.where({ id: req.params.id });
 
-    const post = await db.select().from('articles').where('id', articleId);
+	res.status(200).json(article);
+});
 
-    res.send(post);
+router.get('/:articleid/comments', async (req, res) => {
+
+	const articleComments = await db
+		.select()
+		.from('comments')
+		.where({ articleid: req.params.articleid });
+
+	res.status(200).json(articleComments);
+});
+
+router.get('/:articleid/likes', async (req, res) => {
+
+	const articleLikes = await db
+		.select()
+		.from('likes')
+		.where({ articleid: req.params.articleid });
+
+	res.status(200).json(articleLikes);
 });
 
 router.post('/', async (req, res) => {
 
-    const textPost = req.body.text;
-    const userid = req.body.userid;
+	await db.insert(req.body).into('articles');
 
-    await db('articles').insert({text: textPost, userid: userid});
-
-    res.send(`add post: ${textPost}`);
+	res.status(201).send('Created new article!');
 });
 
 router.put('/:id', async (req, res) => {
 
-    const editPostId = req.params.id;
-    const editText = req.query.text;
+	await db
+		.select()
+		.from('articles')
+		.where({ id: req.params.id })
+		.update(req.body);
 
-    await db('articles').where({id: editPostId}).update({text: editText})
-
-    res.send(`Update id:${editPostId} to ${editText} -> Ok`);
+	res.status(200).send('Article updated!');
 });
 
 router.delete('/:id', async (req, res) => {
 
-    const delPost = req.params.id;
+	await db.select().from('articles').where({ id: req.params.id }).del();
     
-    await db('articles').where({id: delPost}).del();
-
-    res.send('Delete Ok');
+	res.status(200).send('Article deleted!');
 });
 
 module.exports = router;

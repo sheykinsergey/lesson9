@@ -5,46 +5,41 @@ router.get('/', async (req, res) => {
 
     const limit = req.query.limit;
     
-    const list = await db.select().from('users').orderBy('id').limit(limit);
+    const users = await db.select().from('users').orderBy('id').limit(limit);
 
-    res.send(list);
+	res.status(200).json(users);
 });
 
 router.get('/:id', async (req, res) => {
 
-    const userid = req.params.id;
+    const user = await db.select().from('users').where({ id: req.params.id });
 
-    const user = await db.select().from('users').where({'id': userid});
-    
-    res.send(user);
+	res.status(200).json(user);
 });
 
 router.post('/', async (req, res) => {
 
-    const addUser = req.body.name;
+    await db.insert(req.body).into('users');
 
-    await db('users').insert({name: addUser})
-
-    res.send(`add name ${addUser}`);
+	res.status(201).send('Created new user!');
 });
 
 router.put('/:id', async (req, res) => {
 
-    const editUserId = req.params.id;
-    const editName = req.query.name;
+        await db
+        .select()
+        .from('users')
+        .where({ id: req.params.id })
+        .update(req.body);
 
-    await db('users').where({id: editUserId}).update({name: editName})
-
-    res.send(`Update id ${editUserId} to ${editName} Ok`);
+    res.status(200).send('User updated!');
 });
 
 router.delete('/:id', async (req, res) => {
 
-    const delUser = req.params.id;
+    await db.select().from('users').where({ id: req.params.id }).del();
 
-    await db('users').where({id: delUser}).del();
-
-    res.send('Delete Ok');
+	res.status(200).send('User deleted!');  
 });
 
 module.exports = router;

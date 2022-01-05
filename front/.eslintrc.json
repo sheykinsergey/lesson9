@@ -4,15 +4,21 @@
         "commonjs": true,
         "es2021": true
     },
-    "extends": [
-        "prettier",
-        "airbnb-base"
-    ],
+    // "extends": [
+    //     "prettier",
+    //     "airbnb-base"
+    // ],
+    // "parser": "@babel/eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": "latest",
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        },
+        "sourceType": "module"
     },
     "plugins": ["prettier"],
     "rules": {
-        "prettier/prettier": "error"
+        // "prettier/prettier": "error"
     }
 }

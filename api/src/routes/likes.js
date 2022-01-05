@@ -4,30 +4,33 @@ const db = require('../services/db');
 
 router.get('/', async (req, res) => {
 
-    const postid = req.query.postid;
-    
-    const likes = await db('likes').count('userid').where({postid});
+    const likes = await db.select().from('likes').orderBy('id');
 
-    res.send(`likes:  ${likes[0].count}`);
+	res.status(200).json(likes);
 });
+
+router.get('/:id', async (req, res) => {
+
+	const like = await db.select().from('likes').where({ id: req.params.id });
+
+	res.status(200).json(like);
+});
+
+
 
 router.post('/', async (req, res) => {
 
-    const postid = req.body.postid;
-    const userid = req.body.userid;
+	await db.insert(req.body).into('likes');
 
-    await db('likes').insert({postid, userid});
-
-    res.send('add like');
+	res.status(201).send('Like this article!');
 });
+
 
 router.delete('/:id', async (req, res) => {
 
-    const likeid = req.params.id;
-
-    await db('likes').where({id: likeid}).del();
-
-    res.send('like deleted');
+    await db.select().from('likes').where({ id: req.params.id }).del();
+    
+	res.status(200).send('Like is deleted!');
 });
 
 module.exports = router;
