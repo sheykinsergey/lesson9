@@ -16,8 +16,6 @@ router.get('/:id', async (req, res) => {
 	res.status(200).json(like);
 });
 
-
-
 router.post('/', async (req, res) => {
 
 	await db.insert(req.body).into('likes');
