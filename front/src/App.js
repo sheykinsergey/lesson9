@@ -15,17 +15,14 @@ function App() {
                                 // название в меню то менять его придется в одном месте
     // setPage("articles")
   }
-
   const showProfile = (e) => {
     setPage(e.target.innerHTML)
     // setPage("profile")
   }
-
   const showAddArticle = (e) => {
     setPage(e.target.innerText)
     // setPage("addarticle")
   }
-
   return (
     <div className="App">
 

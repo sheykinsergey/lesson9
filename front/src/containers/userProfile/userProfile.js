@@ -1,7 +1,14 @@
 import { UserProfile } from "../../components/userProfile/userProfile"
 
-export function UserProfileCon({ firstName, lastName }){
-    const fullname = `${firstName} ${lastName}`
-    return <UserProfile fullname={fullname}/>
+const initUser = {
+    firstName: "Vasya",
+    lastName: "Pupkin",
+    email: "pupkin@gmail.com",
+
+}
+
+export function UserProfileCon(){
+
+    return <UserProfile firstName={initUser.firstName} lastName={initUser.lastName} email={initUser.email}/>
 
 }

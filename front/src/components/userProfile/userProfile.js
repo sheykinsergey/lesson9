@@ -1,7 +1,9 @@
-export function UserProfile({ fullname }){
+export function UserProfile({ firstName, lastName, email }){
     return (
         <div>
-            <p>Name: {fullname}</p>
+            <p>First Name: {firstName}</p>
+            <p>last Name: {lastName}</p>
+            <p>Email: {email}</p>
         </div>
     )
 }
