@@ -15,16 +15,7 @@ import { UserPost } from "../../components/post/post";
 
 export function UserPostCon(){
 
-    const result = initPost.map((post, idx) => {
-        return (
-            <div key={idx}>
-                <h3>{post.title}</h3>
-                <p>{post.post}</p>
-                <small>{post.publicationDate}</small>
-                <hr />
-            </div>
-        )
-    })
+    
 
-    return <UserPost result={result}/>
+    return <UserPost initPost={initPost}/>
 }
