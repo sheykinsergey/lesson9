@@ -2,8 +2,11 @@ import { UserProfileCon } from "../../containers/userProfile/userProfile";
 import { UserPostCon } from "../../containers/post/post";
 import { AddArticle } from "../../components/addArticle/addArticle";
 
-
+// delete
+import { useState } from "react";
 export function Body({ page }){
+
+
 
   return(
     <>

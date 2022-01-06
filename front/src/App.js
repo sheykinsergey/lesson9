@@ -10,16 +10,20 @@ function App() {
 
   const [page, setPage] = useState("articles") // default page
 
-  const showArticles = () => {
-    setPage("articles")
+  const showArticles = (e) => {
+    setPage(e.target.innerHTML) // думаю этот вариант лучше ибо если менять 
+                                // название в меню то менять его придется в одном месте
+    // setPage("articles")
   }
 
-  const showProfile = () => {
-    setPage("profile")
+  const showProfile = (e) => {
+    setPage(e.target.innerHTML)
+    // setPage("profile")
   }
 
-  const showAddArticle = () => {
-    setPage("addarticle")
+  const showAddArticle = (e) => {
+    setPage(e.target.innerText)
+    // setPage("addarticle")
   }
 
   return (
