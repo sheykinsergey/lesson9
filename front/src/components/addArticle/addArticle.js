@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import { Header } from "../../containers/header/header";
 
 export function AddArticle(){
 
@@ -23,6 +24,7 @@ export function AddArticle(){
 
   return(
     <>
+    <Header />
     <form>
       <h2>add post</h2>
       <div><input value={inputValue}  onChange={handleInput}/></div>

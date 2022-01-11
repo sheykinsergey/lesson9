@@ -1,11 +1,28 @@
+import { Link } from "react-router-dom";
 
-export function Header({showArticles, showProfile, showAddArticle}){
+export function Header(){
 
   return(
-      <div>
-        <button onClick={showArticles}>articles</button>
-        <button onClick={showAddArticle}>addarticle</button>
-        <button onClick={showProfile}>profile</button>
-      </div>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/addArticle">addArticle</Link>
+          </li>
+          <li>
+            <Link to="/article">article</Link>
+          </li>
+          <li>
+            <Link to="/profile">profile</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <hr />
+    </div>
+
   );
 };

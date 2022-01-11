@@ -1,4 +1,5 @@
 import { UserPost } from "../../components/post/post";
+import { Header } from "../header/header";
 
     const initPost = [
         {
@@ -17,5 +18,11 @@ export function UserPostCon(){
 
     
 
-    return <UserPost initPost={initPost}/>
+    return(
+        <>
+            <Header />
+            <UserPost initPost={initPost} />
+        </>
+        
+    )
 }
