@@ -8,7 +8,7 @@ export function PostID(){
     <>
       <Header />
       
-      {/* {+id ? <h1>postID id={id}</h1> : <div>incorrect id</div>} */}
+
       {id.match(/^[0-9]+$/) ? <h1>postID id={id}</h1> : <div>incorrect id</div>}
 
     </>

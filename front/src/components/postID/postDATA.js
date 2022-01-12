@@ -8,6 +8,7 @@ export function PostDATA(){
 
   const getDate = new Date(data)
 
+
   return(
     <>
       <Header />
