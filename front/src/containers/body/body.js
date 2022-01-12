@@ -1,16 +1,11 @@
-import { UserProfileCon } from "../../containers/userProfile/userProfile";
-import { UserPostCon } from "../../containers/post/post";
-import { AddArticle } from "../../components/addArticle/addArticle";
+import { Header } from "../header/header";
 
-export function Body({ page }){
+export function Body(){
 
   return(
     <>
-      {page == 'articles' && <UserPostCon />}
-
-      {page == "profile" && <UserProfileCon />}
-
-      {page == "addarticle" && <AddArticle />}
-    </>
+      <Header />
+      <h2>Home</h2>
+    </>    
   );
-};
+}

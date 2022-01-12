@@ -1,4 +1,5 @@
-import { UserProfile } from "../../components/userProfile/userProfile"
+import { UserProfile } from "../../components/userProfile/userProfile";
+import { Header } from "../header/header";
 
 const initUser = {
     firstName: "Vasya",
@@ -9,6 +10,11 @@ const initUser = {
 
 export function UserProfileCon(){
 
-    return <UserProfile firstName={initUser.firstName} lastName={initUser.lastName} email={initUser.email}/>
+    return(
+        <>
+            <Header />
+            <UserProfile firstName={initUser.firstName} lastName={initUser.lastName} email={initUser.email}/>
+        </>
+    )
 
 }

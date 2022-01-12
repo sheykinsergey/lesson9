@@ -1,40 +1,40 @@
 import { Body } from "./containers/body/body";
-import { Header } from "./containers/header/header";
+import { AddArticle } from "./components/addArticle/addArticle";
+import { UserPostCon } from "./containers/post/post";
+import { UserProfileCon } from "./containers/userProfile/userProfile";
+import { PostID } from "./components/postID/postID";
+import { PostSTR } from "./components/postID/postSTR";
+import { PostFILE } from "./components/postID/postFILE";
+import { PostDATA } from "./components/postID/postDATA";
 
-import { useState } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+
 
 import './App.css';
 
 
 function App() {
 
-  const [page, setPage] = useState("articles") // default page
-
-  const showArticles = (e) => {
-    setPage(e.target.innerHTML) // думаю этот вариант лучше ибо если менять 
-                                // название в меню то менять его придется в одном месте
-    // setPage("articles")
-  }
-  const showProfile = (e) => {
-    setPage(e.target.innerHTML)
-    // setPage("profile")
-  }
-  const showAddArticle = (e) => {
-    setPage(e.target.innerText)
-    // setPage("addarticle")
-  }
   return (
-    <div className="App">
-
-      <header className="App-header">
-        <Header showArticles={showArticles} showAddArticle={showAddArticle} showProfile={showProfile} />
-      </header>
-
-      <div className="App-body">
-        <Body page={page} />
-      </div>
-
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Body />}/>
+        <Route path="addArticle" element={<AddArticle />} />
+        <Route path="article" element={<UserPostCon />} />
+        <Route path="profile" element={<UserProfileCon/>} />
+        <Route path="article/:id" element={<PostID />} />
+        <Route path="articlestr/:str" element={<PostSTR />} />
+        <Route path="articlefile/:file" element={<PostFILE />} />
+        <Route path="articledata/:data" element={<PostDATA />} />
+        <Route path="*" element={<div>404</div>} />
+      </Routes>
+    </BrowserRouter>
+    
   );
 };
+
 export default App;
