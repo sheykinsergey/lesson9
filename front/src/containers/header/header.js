@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 
 export function Header(){
-
+  
   return(
+    
     <div>
+
       <nav>
         <ul>
           <li>
@@ -18,11 +20,16 @@ export function Header(){
           <li>
             <Link to="/profile">profile</Link>
           </li>
+          <li>
+            <Link to="/profile/user">profile/user</Link>
+          </li>
         </ul>
       </nav>
 
       <hr />
+
     </div>
+    
 
   );
 };

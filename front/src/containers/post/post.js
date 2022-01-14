@@ -1,5 +1,6 @@
-import { UserPost } from "../../components/post/post";
+import  UserPost  from "../../components/post/post";
 import { Header } from "../header/header";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
     const initPost = [
         {
@@ -10,19 +11,21 @@ import { Header } from "../header/header";
         {
         title: "two post",
         post: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod.",
-        publicationDate: "31.12.2021"
+        publicationDate: "30.11.2021"
         },  
     ]
 
-export function UserPostCon(){
-
-    
+    const UserPostCon = () => {
 
     return(
         <>
             <Header />
-            <UserPost initPost={initPost} />
+            <ErrorBoundary>
+                <UserPost initPost={initPost} />
+            </ErrorBoundary>
+            
         </>
         
     )
 }
+export default UserPostCon;
