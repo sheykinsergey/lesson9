@@ -5,6 +5,7 @@ export function Body(){
   return(
     <>
       <Header />
+
       <h2>Home</h2>
     </>    
   );
