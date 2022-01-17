@@ -1,6 +1,5 @@
 import  UserPost  from "../../components/post/post";
 import { Header } from "../header/header";
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
     const initPost = [
         {
@@ -20,9 +19,8 @@ import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
     return(
         <>
             <Header />
-            <ErrorBoundary>
+
                 <UserPost initPost={initPost} />
-            </ErrorBoundary>
             
         </>
         

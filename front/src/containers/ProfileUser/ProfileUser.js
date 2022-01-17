@@ -1,6 +1,5 @@
 import { Header } from "../header/header";
 import ProfileUser from "../../components/ProfileUser/ProfileUser";
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 
 export function ProfileUserCon(){
@@ -8,7 +7,6 @@ export function ProfileUserCon(){
   return(
       <>
           <Header />
-          <ErrorBoundary>
           <ProfileUser 
               user={
                 {
@@ -86,7 +84,6 @@ export function ProfileUserCon(){
                 ]
                 }}
           />
-          </ErrorBoundary>
       </>
   )
 

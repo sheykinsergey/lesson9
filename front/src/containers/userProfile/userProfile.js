@@ -1,6 +1,5 @@
 import  UserProfile  from "../../components/userProfile/userProfile";
 import { Header } from "../header/header";
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 const initUser = {
     firstName: "Vasya",
@@ -16,7 +15,6 @@ export function UserProfileCon(){
     return(
         <>
             <Header />
-            <ErrorBoundary>
             <UserProfile 
                 firstName={initUser.firstName}
                 lastName={initUser.lastName}
@@ -24,7 +22,6 @@ export function UserProfileCon(){
                 age={initUser.age}
                 avatar={initUser.avatar}
             />
-            </ErrorBoundary>
         </>
     )
 
