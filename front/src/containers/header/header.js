@@ -15,10 +15,13 @@ export function Header(){
             <Link to="/addArticle">addArticle</Link>
           </li>
           <li>
-            <Link to="/article">article</Link>
+            <Link to="/posts">posts</Link>
           </li>
           <li>
             <Link to="/profile">profile</Link>
+          </li>
+          <li>
+            <Link to="/users">users</Link>
           </li>
           <li>
             <Link to="/profile/user">profile/user</Link>

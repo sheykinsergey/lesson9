@@ -1,29 +1,18 @@
-import  UserPost  from "../../components/post/post";
+import  PostComponent  from "../../components/post/post";
 import { Header } from "../header/header";
+import { getPosts } from "./api/crud";
+import { useQuery } from "react-query";
 
-    const initPost = [
-        {
-        title: "first post",
-        post: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod.",
-        publicationDate: "30.11.2021"
-        },
-        {
-        title: "two post",
-        post: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod.",
-        publicationDate: "30.11.2021"
-        },  
-    ]
-
-    const UserPostCon = () => {
-
-    return(
-        <>
-            <Header />
-
-                <UserPost initPost={initPost} />
+    const PostContainer = () => {
+        const { isFetching, data } = useQuery('posts', () => getPosts());
+        const posts = data?.data || []
+        return(
+            <>
+                <Header />
+                {isFetching && <div>Loading...</div>}
+                <PostComponent initPost={posts} />
+            </>
             
-        </>
-        
-    )
+        )
 }
-export default UserPostCon;
+export default PostContainer;

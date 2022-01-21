@@ -3,8 +3,8 @@ const db = require('../services/db');
 
 router.get('/', async (req, res) => {
 
-	const articles = await db.select().from('articles').orderBy('id');
-
+	const articles = await db.select().from('posts').orderBy('id', 'desc');
+	
 	res.status(200).json(articles);
 });
 

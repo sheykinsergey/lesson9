@@ -2,10 +2,8 @@ const router = require('express').Router();
 const db = require('../services/db');
 
 router.get('/', async (req, res) => {
-
-    const limit = req.query.limit;
     
-    const users = await db.select().from('users').orderBy('id').limit(limit);
+    const users = await db.select().from('users').orderBy('id')
 
 	res.status(200).json(users);
 });
