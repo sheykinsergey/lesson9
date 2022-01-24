@@ -8,7 +8,7 @@ import { PostFILE } from "./components/postID/postFILE";
 import { PostDATA } from "./components/postID/postDATA";
 import { ProfileUserCon } from "./containers/ProfileUser/ProfileUser"
 import UsersContainer from "./containers/users/users"
-import UserContainer from "./containers/user/user"
+import UserContainer from "./containers/users/user"
 
 import {
   BrowserRouter,
@@ -35,10 +35,10 @@ function App() {
             <Route path="users" element={<UsersContainer />} />
             <Route path="users/:id" element={<UserContainer />} />
             <Route path="profile/user" element={<ProfileUserCon/>} />
-            <Route path="article/:id" element={<PostID />} />
+            {/* <Route path="article/:id" element={<PostID />} />
             <Route path="articlestr/:str" element={<PostSTR />} />
             <Route path="articlefile/:file" element={<PostFILE />} />
-            <Route path="articledata/:data" element={<PostDATA />} />
+            <Route path="articledata/:data" element={<PostDATA />} /> */}
             <Route path="*" element={<div>404</div>} />
           </Routes>
         </BrowserRouter>

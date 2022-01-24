@@ -18,6 +18,11 @@ const UserComponent = ({user}) => {
   return (
     <>
       {id.match(/^[0-9]+$/) ? result : <div>incorrect id</div>}
+      <form enctype="multipart/form-data" action="http://localhost:3001/avatar" method="post">
+        <input type="file" name="avatar" />
+        <input type="text" name="id" />
+        <button type="submit">save</button>
+      </form>
     </>
   )
 }

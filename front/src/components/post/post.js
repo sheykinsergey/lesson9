@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 
 const PostComponent = ({ initPost }) => {
 
-    const result = initPost.map(({ id, user_id, date, text, likes }) => {
+    const result = initPost.map(({ id, userId, date, text, likes }) => {
         
         return (
             <div key={id}>
                 <h3>PostID {id}</h3>
-                <p>UserID {user_id}</p>
+                <p>UserID {userId}</p>
                 <p>{text}</p>
                 <small>{date}</small>
                 <small> //like {likes}</small>
