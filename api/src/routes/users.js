@@ -1,44 +1,26 @@
 const router = require('express').Router();
-const db = require('../services/db');
+const usersService = require('../services/store/user.service');
 
 router.get('/', async (req, res) => {
-
-    const limit = req.query.limit;
-    
-    const users = await db.select().from('users').orderBy('id').limit(limit);
-
-	res.status(200).json(users);
+    res.send(await usersService.getAllUsers())
 });
 
 router.get('/:id', async (req, res) => {
-
-    const user = await db.select().from('users').where({ id: req.params.id });
-
-	res.status(200).json(user);
+    res.send(await usersService.getUserId(req.params.id))
 });
 
 router.post('/', async (req, res) => {
-
-    await db.insert(req.body).into('users');
-
-	res.status(201).send('Created new user!');
+    await usersService.addUser(req.body)
+    res.send('Created new user!')
 });
 
 router.put('/:id', async (req, res) => {
-
-        await db
-        .select()
-        .from('users')
-        .where({ id: req.params.id })
-        .update(req.body);
-
+    await usersService.updateUser(req.params.id, req.body)
     res.status(200).send('User updated!');
 });
 
 router.delete('/:id', async (req, res) => {
-
-    await db.select().from('users').where({ id: req.params.id }).del();
-
+    await usersService.deleteUser(req.params.id);
 	res.status(200).send('User deleted!');  
 });
 

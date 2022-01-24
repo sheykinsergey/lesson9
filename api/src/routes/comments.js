@@ -1,44 +1,29 @@
 const router = require('express').Router();
-const db = require('../services/db');
+const commentService = require('../services/store/comment.service');
 
 router.get('/', async (req, res) => {
-
-    const comments = await db.select().from('comments').orderBy('id');
-
-	res.status(200).json(comments);
+	res.send(await commentService.getAllComments());
 });
 
-router.get('/:id', async (req, res) => {
-
-	const comment = await db
-		.select()
-		.from('comments')
-		.where({ id: req.params.id });
-
-	res.status(200).json(comment);
+router.get('/:commentId', async (req, res) => {
+	res.send(await commentService.getCommentsId(req.params.commentId))
 });
 
 router.post('/', async (req, res) => {
 
-	await db.insert(req.body).into('comments');
+	await commentService.addComment(req.body);
 
 	res.status(201).send('Created new comment!');
 });
 
-router.put('/:id', async (req, res) => {
-
-	await db
-		.select()
-		.from('comments')
-		.where({ id: req.params.id })
-		.update(req.body);
-
+router.put('/:commentId', async (req, res) => {
+	await commentService.updateComment(req.params.commentId, req.body);
 	res.status(200).send('Comment updated!');
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:commentId', async (req, res) => {
 
-	await db.select().from('comments').where({ id: req.params.id }).del();
+	await commentService.deleteComment(req.params.commentId);
     
 	res.status(200).send('Comment deleted!');
 });

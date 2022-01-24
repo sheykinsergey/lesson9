@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 
-const UserPost = ({initPost}) => {
+const PostComponent = ({ initPost }) => {
 
-    const result = initPost.map((post, idx) => {
+    const result = initPost.map(({ id, userId, date, text, likes }) => {
         
         return (
-            <div key={idx}>
-                <h3>{post.title}</h3>
-                <p>{post.post}</p>
-                <small>{post.publicationDate}</small>
+            <div key={id}>
+                <h3>PostID {id}</h3>
+                <p>UserID {userId}</p>
+                <p>{text}</p>
+                <small>{date}</small>
+                <small> //like {likes}</small>
                 <hr />
             </div>
         )
@@ -20,15 +22,16 @@ const UserPost = ({initPost}) => {
         </>
     )
 }
-
-UserPost.propTypes = {
+PostComponent.propTypes = {
     initPost: PropTypes.arrayOf(
         PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            post: PropTypes.string.isRequired,
-            publicationDate: PropTypes.string.isRequired
+            id: PropTypes.number.isRequired,
+            user_id: PropTypes.number.isRequired,
+            text: PropTypes.string.isRequired,
+            date: PropTypes.string.isRequired,
+            likes: PropTypes.number.isRequired
         })
     )
 }
 
-export default UserPost;
+export default PostComponent;

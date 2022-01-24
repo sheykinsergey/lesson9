@@ -1,33 +1,13 @@
 const router = require('express').Router();
-const db = require('../services/db');
-
-
-router.get('/', async (req, res) => {
-
-    const likes = await db.select().from('likes').orderBy('id');
-
-	res.status(200).json(likes);
-});
-
-router.get('/:id', async (req, res) => {
-
-	const like = await db.select().from('likes').where({ id: req.params.id });
-
-	res.status(200).json(like);
-});
+const postLikeService = require('../services/store/post.like.service');
 
 router.post('/', async (req, res) => {
-
-	await db.insert(req.body).into('likes');
-
-	res.status(201).send('Like this article!');
+	await postLikeService.addLike(req.body);
+	res.status(201).send('Like this post!');
 });
 
-
-router.delete('/:id', async (req, res) => {
-
-    await db.select().from('likes').where({ id: req.params.id }).del();
-    
+router.delete('/:likeId', async (req, res) => {
+	await postLikeService.deleteLike(req.params.likeId);
 	res.status(200).send('Like is deleted!');
 });
 
