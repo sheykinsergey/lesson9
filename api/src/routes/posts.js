@@ -6,7 +6,10 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:postId', async (req, res) => {
-	res.send(await postService.getPostId(req.params.postId));
+	res.send(await postService.getPostId(req.params.postId, req.params.userId));
+});
+router.get('/:postId', async (req, res) => {
+	res.send(await postService.getPostIdUserId(req.params.postId));
 });
 
 router.get('/:postId/comments', async (req, res) => {

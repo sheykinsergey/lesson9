@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const usersService = require('../services/store/user.service');
+const avatar = require('./avatar')
 
 router.get('/', async (req, res) => {
     res.send(await usersService.getAllUsers())
@@ -24,4 +25,10 @@ router.delete('/:id', async (req, res) => {
 	res.status(200).send('User deleted!');  
 });
 
+router.post('/:id', avatar.single('avatar'), function (req, res, next) {
+    if(!req.file){
+        res.send('error')
+    }
+    res.redirect(303, `http://localhost:3000/users/${req.params.id}`)
+})
 module.exports = router;

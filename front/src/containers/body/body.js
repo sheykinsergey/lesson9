@@ -1,12 +1,12 @@
 import { Header } from "../header/header";
+import PostContainer from "../post/post"
 
 export function Body(){
 
   return(
     <>
       <Header />
-
-      <h2>Home</h2>
+      <PostContainer />
     </>    
   );
 }

@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 
 const UserComponent = ({user}) => {
   const { id } = useParams();
-  
+  const url = `http://localhost:3001/users/${id}`
+  const urlImage = `http://localhost:3001/uploads/${id}/avatar.jpg`
   const result = user.map(({id, name, email, phone, university}) => {
+    
     return (
       <div key={id}>
+      <img src={urlImage} width='150' />
         <p>id: {id}</p>
         <p>name: {name}</p>
         <p>email: {email}</p>
@@ -15,12 +18,13 @@ const UserComponent = ({user}) => {
       </div>
     )
   })
+  
   return (
     <>
       {id.match(/^[0-9]+$/) ? result : <div>incorrect id</div>}
-      <form enctype="multipart/form-data" action="http://localhost:3001/avatar" method="post">
+      
+      <form encType="multipart/form-data" action={url} method="post">
         <input type="file" name="avatar" />
-        <input type="text" name="id" />
         <button type="submit">save</button>
       </form>
     </>
