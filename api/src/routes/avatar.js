@@ -1,3 +1,4 @@
+
 const multer  = require('multer');
 const fs = require('fs-extra');
 
@@ -14,7 +15,7 @@ const storage = multer.diskStorage({
 		}
 	})
   const fileFilter = (req, file, cb)=>{
-    if (file.mimetype != 'image/png' && file.mimetype != 'image/jpeg' && file.mimetype != 'image/jpg') {
+    if (file.mimetype != 'image/jpeg' && file.mimetype != 'image/jpg') {
       console.log(`${file.originalname}`, '-> неправильный тип файла');
       
       return cb(null, false);

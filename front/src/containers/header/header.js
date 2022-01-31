@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -58,6 +60,11 @@ export function Header(){
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [value, setValue] = useState('');
+    const changeText = (e) => {
+      setValue(e.target.value)
+    }
   
   return(
     <AppBar position="static">
@@ -128,7 +135,7 @@ export function Header(){
             >
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                    <Link to="/users/8" style={{ textDecoration: 'none' }}>Profile</Link>
+                    <Link to="/profile/1" style={{ textDecoration: 'none' }}>Profile</Link>
                   </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseUserMenu}>
@@ -157,9 +164,11 @@ export function Header(){
                   Add Article
                 </Typography>
                 <TextareaAutosize
+                  value={value}
                   minRows={10}
                   placeholder="Add post"
                   style={{ width: "100%" }}
+                  onChange={changeText}
                 />
                 <Stack direction="row" spacing={43}>
                   <Button variant="contained" onClick={handleClose}>Cancel</Button>

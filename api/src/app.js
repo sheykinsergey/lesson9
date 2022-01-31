@@ -7,6 +7,7 @@ const userRoutes = require('./routes/users');
 const postsRoutes = require('./routes/posts');
 const commentsRoutes = require('./routes/comments');
 const likesRoutes = require('./routes/likes');
+const profileRoutes = require('./routes/profile');
 
 const app = express();
 const port = config.appPort;
@@ -20,6 +21,7 @@ app.use('/users', userRoutes);
 app.use('/posts', postsRoutes);
 app.use('/comments', commentsRoutes);
 app.use('/likes', likesRoutes);
+app.use('/profile', profileRoutes);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console

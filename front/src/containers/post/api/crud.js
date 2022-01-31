@@ -6,3 +6,4 @@ export const getPosts = async () => {
 export const getPost = async (id) => {
   return apiClient.get(`/posts/${id}`)
 }
+

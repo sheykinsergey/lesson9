@@ -34,7 +34,7 @@ function App() {
             <Route path="addArticle" element={<AddArticle />} />
             <Route path="posts" element={<PostContainer />} />
             {/* <Route path="posts/:id" element={<EditPost />} /> */}
-            <Route path="profile" element={<UserProfileCon />} />
+            <Route path="profile/:id" element={<UserProfileCon />} />
             {/* <Route path="users/:id" element={<UserProfileCon />} /> */}
             <Route path="users" element={<UsersContainer />} />
             <Route path="users/:id" element={<UserContainer />} />

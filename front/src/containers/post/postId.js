@@ -8,13 +8,13 @@ import { Header } from "../header/header";
 
 const PostIdContainer = () => {
   const { id } = useParams();
-  const { isFetching, data } = useQuery('posts/${id}', () => getPost(id));
+    const { isFetching, data } = useQuery('posts/${id}', () => getPost(id));
   const post = data?.data || []
+  
   return (
     <>
       <Header />
-      {isFetching && <div>Loading...</div>}
-      <PostIdComponent post={post} />
+      <PostIdComponent post={post}/>
     </>
   )
 }
