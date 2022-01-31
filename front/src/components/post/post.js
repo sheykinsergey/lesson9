@@ -46,7 +46,7 @@ const PostComponent = ({ initPost }) => {
         setModalActive(true)
     }
 
-    const result = initPost.map(({ id, userId, date, text, likes }) => {
+    const result = initPost.map(({ id, userId, date, text }) => {
         return (
             <Card key={id} sx={{ maxWidth: 700 }} style={{marginTop: 10}}>
                 <CardHeader
@@ -75,7 +75,7 @@ const PostComponent = ({ initPost }) => {
                 <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
-                    {likes}
+                    
                     </IconButton>
                 </CardActions>
             </Card>
@@ -100,7 +100,6 @@ PostComponent.propTypes = {
             userId: PropTypes.number.isRequired,
             text: PropTypes.string.isRequired,
             date: PropTypes.string.isRequired,
-            likes: PropTypes.number.isRequired
         })
     )
 }

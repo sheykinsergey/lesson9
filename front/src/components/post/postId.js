@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import axios from "axios";
 import { useState } from 'react';
+import { useMutation } from "react-query";
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -22,13 +23,14 @@ const PostIdComponent = ({post}) => {
 
     const url = `http://localhost:3001/posts/${id}`
 
-    const config = { headers: {'Content-Type': 'application/json'} };
-    const body = {text: value}
-    const sendingEditedPost = (e) => {
-      axios.put(url, body, config)
-      .then(response => {
-        console.log(response);
-      }).catch(e => console.log(e));
+    const mutation = useMutation((data) =>
+      axios.put(url, data)
+    );
+    const setPost = (e) => {
+      e.preventDefault()
+      mutation.mutate({
+        text: value,
+      })
     }
 
     const schema = Yup.object().shape({
@@ -39,20 +41,21 @@ const PostIdComponent = ({post}) => {
     return (
       <Formik 
         key={id}
-        initialValues={{id, userId, text}}
+        initialValues={{id, userId, value}}
         validationSchema={schema}
       >
       {({errors, touched}) => 
       <>
-        <Form onSubmit={sendingEditedPost}>
+        <Form onSubmit={setPost}>
 
         {errors.text && touched.text ? (<div>{errors.text}</div>) : null}
           <Field 
             component={TextField}
+            label="Edit Post"
             multiline
             maxRows={10}
             fullWidth
-            name='text'
+            name='value'
             value={value}
             onChange={changeText}
           />

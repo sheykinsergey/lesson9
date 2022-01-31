@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import axios from "axios";
+import { useState } from 'react';
+import { useMutation } from "react-query";
 
 import { useParams } from "react-router-dom";
 import { Formik, Form, Field } from 'formik';
@@ -14,63 +16,92 @@ const UserProfile = ({ user }) => {
     const { id } = useParams();
     const url = `http://localhost:3001/profile/${id}`
     const urlImage = `http://localhost:3001/uploads/${id}/avatar.jpg`
+
     const result = user.map(({id, name, email, phone, university}) => {
-        const schema = Yup.object().shape({
-            name: Yup.string('to string').min(2, 'Too Short!').max(70, 'Too Long!').required('Required'),
-            email: Yup.string().email('Invalid email').required('Required'),
-            phone: Yup.string().required('Required'),
-            university: Yup.string().required('Required')
-        })
+
+            const [nameValue, setNameValue] = useState(name);
+            const changeName = (e) => {
+                setNameValue(e.target.value)
+            }
+            const [emailValue, setEmailValue] = useState(email);
+            const changeEmail = (e) => {
+                setEmailValue(e.target.value)
+            }
+            const [phoneValue, setPhoneValue] = useState(phone);
+            const changePhone = (e) => {
+                setPhoneValue(e.target.value)
+            }
+            const [universityValue, setUniversityValue] = useState(university);
+            const changeUniversity = (e) => {
+                setUniversityValue(e.target.value)
+            }
+        
             const onFormSubmit = (data) => {
                 console.log(data);
             }
 
             const url = `http://localhost:3001/users/${id}`
-            const config = { headers: {'Content-Type': 'application/json'} };
-            const body = {name: name, email: email, phone: phone, university: university }
-            
-            const sendingEditedUser = (e) => {
-                e.preventDefault()
-                axios.put(url, body, config)
-                .then(response => {
-                    console.log(response);
-                }).catch(e => console.log(e));
+            const mutation = useMutation((data) =>
+                axios.put(url, data)
+            );
+            const setUser = () => {
+
+                mutation.mutate({
+                    name: nameValue,
+                    email: emailValue,
+                    phone: phoneValue,
+                    university: universityValue
+                })
             }
+            const schema = Yup.object().shape({
+                nameValue: Yup.string('to string').min(2, 'Too Short!').max(70, 'Too Long!').required('Required'),
+                emailValue: Yup.string().email('Invalid email').required('Required'),
+                phoneValue: Yup.string().required('Required'),
+                universityValue: Yup.string().required('Required')
+            })
             return (
                 <Formik 
                     key={id}
-                    initialValues={{name, email, phone, university}}
+                    initialValues={{nameValue, emailValue, phoneValue, universityValue}}
                     validationSchema={schema}
                     onSubmit={onFormSubmit}
                     >
-                    <Form onSubmit={sendingEditedUser}>
+                    <Form onSubmit={setUser}>
                         <Field 
                             style={{marginTop: 10}}
                             component={TextField}
-                            name='name'
+                            name='nameValue'
                             label="Name"
+                            value={nameValue}
+                            onChange={changeName}
                         />
                         <br />
                         <Field
                             style={{marginTop: 10}}
                             component={TextField}
-                            name="email"
+                            name="emailValue"
                             type="email"
                             label="Email"
+                            value={emailValue}
+                            onChange={changeEmail}
                         />
                         <br />
                         <Field
                             style={{marginTop: 10}}
                             component={TextField}
-                            name="phone"
+                            name="phoneValue"
                             label="Phone"
+                            value={phoneValue}
+                            onChange={changePhone}
                         />
                         <br />
                         <Field
                             style={{marginTop: 10}}
                             component={TextField}
-                            name="university"
+                            name="universityValue"
                             label="University"
+                            value={universityValue}
+                            onChange={changeUniversity}
                         />
                         <br />
                         <Button
@@ -81,6 +112,7 @@ const UserProfile = ({ user }) => {
                         >Save
                         </Button>
                     </Form>
+
                 </Formik>
             )
     })

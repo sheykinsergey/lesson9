@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,31 +13,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Modal from '@mui/material/Modal';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-import CloseIcon from '@mui/icons-material/Close';
-import Stack from '@mui/material/Stack';
-
-
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
 
 import logo from '../../logo.png'
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 0
-};
 
 export function Header(){
-
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -57,15 +34,7 @@ export function Header(){
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
-  const [value, setValue] = useState('');
-    const changeText = (e) => {
-      setValue(e.target.value)
-    }
-  
   return(
     <AppBar position="static">
       <Container maxWidth="md">
@@ -109,17 +78,20 @@ export function Header(){
               }}
             >
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" onClick={handleOpen}>AddArticle</Typography>
+                <Link to="/addarticle"><Typography textAlign="center">AddArticle</Typography></Link>
+                  
 
                 </MenuItem>
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 3, display: { xs: 'none', md: 'flex' } }}>
-
-              <Button
-                onClick={handleOpen}
+          <Link to="/addarticle" style={{ textDecoration: 'none' }}>
+            <Button
                 sx={{ my: 2, color: 'white', display: 'block' }}
-              >AddArticle</Button>
+              >AddArticle
+            </Button>
+          </Link>
+              
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -145,38 +117,6 @@ export function Header(){
           </Box>
         </Toolbar>
       </Container>
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
-      <Card sx={style}>
-        <CardHeader
-            action={
-              <IconButton 
-              style={{padding: 0}}
-                onClick={handleClose} >
-                    <CloseIcon />
-              </IconButton>
-            } />
-
-            <CardContent>
-              <Typography variant="h6" component="h6">
-                  Add Article
-                </Typography>
-                <TextareaAutosize
-                  value={value}
-                  minRows={10}
-                  placeholder="Add post"
-                  style={{ width: "100%" }}
-                  onChange={changeText}
-                />
-                <Stack direction="row" spacing={43}>
-                  <Button variant="contained" onClick={handleClose}>Cancel</Button>
-                  <Button variant="contained">Add</Button>
-                </Stack>
-            </CardContent>
-      </Card>
-      </Modal>
     </AppBar>
 
   );
