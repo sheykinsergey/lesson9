@@ -4,6 +4,8 @@ import { getUser } from "../users/api/crud";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
+
+
 const UserContainer = () => {
   const { id } = useParams();
   
@@ -13,7 +15,7 @@ const UserContainer = () => {
   return (
     <>
       <Header />
-      {isFetching && <div>Loading...</div>}
+
       <UserComponent user={user} />
     </>
   )

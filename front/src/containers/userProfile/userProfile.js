@@ -1,27 +1,19 @@
 import  UserProfile  from "../../components/userProfile/userProfile";
 import { Header } from "../header/header";
+import { useQuery } from "react-query";
+import { getUser } from "../userProfile/api/crud"
+import { useParams } from "react-router-dom";
 
-const initUser = {
-    firstName: "Vasya",
-    lastName: "Pupkin",
-    email: "pupkin@gmail.com",
-    age: 33,
-    avatar: "/img/avatar1.jpg"
-
-}
 
 export function UserProfileCon(){
+    const { id } = useParams();
+    const { isFetching, data } = useQuery('profile/${id}', () => getUser(id));
+    const user = data?.data || []
 
     return(
         <>
             <Header />
-            <UserProfile 
-                firstName={initUser.firstName}
-                lastName={initUser.lastName}
-                email={initUser.email}
-                age={initUser.age}
-                avatar={initUser.avatar}
-            />
+            <UserProfile user={user}/>
         </>
     )
 

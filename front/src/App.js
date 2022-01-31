@@ -9,6 +9,7 @@ import { PostDATA } from "./components/postID/postDATA";
 import { ProfileUserCon } from "./containers/ProfileUser/ProfileUser"
 import UsersContainer from "./containers/users/users"
 import UserContainer from "./containers/users/user"
+import PostIdContainer from "./containers/post/postId";
 
 import {
   BrowserRouter,
@@ -17,6 +18,7 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import EditPost from "./components/post/modal/modal";
 
 
 
@@ -31,12 +33,14 @@ function App() {
             <Route path="/" element={<Body />}/>
             <Route path="addArticle" element={<AddArticle />} />
             <Route path="posts" element={<PostContainer />} />
-            <Route path="profile" element={<UserProfileCon />} />
+            {/* <Route path="posts/:id" element={<EditPost />} /> */}
+            <Route path="profile/:id" element={<UserProfileCon />} />
+            {/* <Route path="users/:id" element={<UserProfileCon />} /> */}
             <Route path="users" element={<UsersContainer />} />
             <Route path="users/:id" element={<UserContainer />} />
             <Route path="profile/user" element={<ProfileUserCon/>} />
-            {/* <Route path="article/:id" element={<PostID />} />
-            <Route path="articlestr/:str" element={<PostSTR />} />
+            <Route path="posts/:id" element={<PostIdContainer />} />
+            {/* <Route path="articlestr/:str" element={<PostSTR />} />
             <Route path="articlefile/:file" element={<PostFILE />} />
             <Route path="articledata/:data" element={<PostDATA />} /> */}
             <Route path="*" element={<div>404</div>} />

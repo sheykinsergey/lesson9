@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const usersService = require('../services/store/user.service');
 
+
 router.get('/', async (req, res) => {
     res.send(await usersService.getAllUsers())
 });

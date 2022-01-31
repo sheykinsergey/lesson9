@@ -5,14 +5,14 @@
         "node": true
     },
     "extends": [
-        "prettier",
-        "airbnb-base"
+        // "prettier",
+        // "airbnb-base"
     ],
     "parserOptions": {
         "ecmaVersion": 2018
     },
-    "plugins": ["prettier"],
+    // "plugins": ["prettier"],
     "rules": {
-        "prettier/prettier": "error"
+        // "prettier/prettier": "error"
     }
 }

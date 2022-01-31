@@ -7,7 +7,7 @@ const userRoutes = require('./routes/users');
 const postsRoutes = require('./routes/posts');
 const commentsRoutes = require('./routes/comments');
 const likesRoutes = require('./routes/likes');
-const avatarRoutes = require('./routes/avatar');
+const profileRoutes = require('./routes/profile');
 
 const app = express();
 const port = config.appPort;
@@ -15,12 +15,13 @@ const port = config.appPort;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use('/uploads', express.static(__dirname + '../../uploads'));
 
 app.use('/users', userRoutes);
 app.use('/posts', postsRoutes);
 app.use('/comments', commentsRoutes);
 app.use('/likes', likesRoutes);
-app.use('/avatar', avatarRoutes);
+app.use('/profile', profileRoutes);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
