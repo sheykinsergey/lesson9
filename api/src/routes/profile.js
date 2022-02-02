@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const avatar = require('./avatar')
 
-router.post('/:id', avatar.single('avatar'), function (req, res, next) {
+router.post('/:id', avatar.single('avatar'),  (req, res, next) => {
   if(!req.file){
       res.send('error')
   }

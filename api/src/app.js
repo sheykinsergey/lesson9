@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const logs = require('./middlewares/logs');
+const errorHandling = require('./middlewares/errorHandling');
+const db = require('./services/db');
 
 const config = require('./services/config');
 const userRoutes = require('./routes/users');
@@ -12,6 +15,11 @@ const profileRoutes = require('./routes/profile');
 const app = express();
 const port = config.appPort;
 
+app.use(logs({
+  logTableName: 'logs',
+  db
+}))
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
@@ -22,6 +30,8 @@ app.use('/posts', postsRoutes);
 app.use('/comments', commentsRoutes);
 app.use('/likes', likesRoutes);
 app.use('/profile', profileRoutes);
+
+app.use(errorHandling);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
