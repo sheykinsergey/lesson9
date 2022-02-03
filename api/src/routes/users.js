@@ -1,28 +1,30 @@
 const router = require('express').Router();
 const usersService = require('../services/store/user.service');
+const asyncError = require('../middlewares/asyncError');
+// const asyncHandler = require('express-async-handler')
 
 
-router.get('/', async (req, res) => {
+router.get('/', asyncError(async (req, res) => {
     res.send(await usersService.getAllUsers())
-});
+}));
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', asyncError(async (req, res) => {
     res.send(await usersService.getUserId(req.params.id))
-});
+}));
 
-router.post('/', async (req, res) => {
+router.post('/', asyncError(async (req, res) => {
     await usersService.addUser(req.body)
     res.send('Created new user!')
-});
+}));
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', asyncError(async (req, res) => {
     await usersService.updateUser(req.params.id, req.body)
     res.status(200).send('User updated!');
-});
+}));
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', asyncError(async (req, res) => {
     await usersService.deleteUser(req.params.id);
 	res.status(200).send('User deleted!');  
-});
+}));
 
 module.exports = router;
