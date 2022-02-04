@@ -1,8 +1,5 @@
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
-import axios from "axios";
-import { useState } from 'react';
-import { useMutation } from "react-query";
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -11,88 +8,73 @@ import Container from '@mui/material/Container';
 import { TextField } from 'formik-mui';
 
 
-const PostIdComponent = ({post}) => {
-  
+  const PostIdComponent = ({post, mutate, id}) => {
+    
+    const result = post.map(({id, userId, text})=>{
 
-  const result = post.map(({id, userId, text})=>{
+      const onFormSubmit = (data) => {
+        mutate({ id, data });
+      };
 
-    const [value, setValue] = useState(text);
-    const changeText = (e) => {
-      setValue(e.target.value)
-    }
-
-    const url = `http://localhost:3001/posts/${id}`
-
-    const mutation = useMutation((data) =>
-      axios.put(url, data)
-    );
-    const setPost = (e) => {
-      e.preventDefault()
-      mutation.mutate({
-        text: value,
+      const schema = Yup.object().shape({
+        id: Yup.number().positive().required(),
+        userId: Yup.number().positive().required(),
+        text: Yup.string().min(3, 'Too Short!').required('must be required')
       })
-    }
+      return (
+        <Formik 
+          key={id}
+          initialValues={{id, userId, text}}
+          validationSchema={schema}
+          onSubmit={onFormSubmit}
+        >
+        {({errors, touched}) => 
+        <>
+          <Form >
 
-    const schema = Yup.object().shape({
-      id: Yup.number().positive().required(),
-      userId: Yup.number().positive().required(),
-      text: Yup.string().min(3, 'Too Short!').required('must be required')
+          {errors.text && touched.text ? (<div>{errors.text}</div>) : null}
+            <Field 
+              component={TextField}
+              label="Edit Post"
+              multiline
+              maxRows={10}
+              fullWidth
+              name='text'
+            />
+            <br />
+            <Button
+              style={{marginTop: 10}}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >Save
+            </Button>
+          </Form>
+          </>
+        }
+        </Formik>
+      )
     })
-    return (
-      <Formik 
-        key={id}
-        initialValues={{id, userId, value}}
-        validationSchema={schema}
-      >
-      {({errors, touched}) => 
-      <>
-        <Form onSubmit={setPost}>
+    
+    return(
+      <> 
+        <Container maxWidth="md">
+              <Typography variant="h5" component="h5">Edit Post</Typography>
 
-        {errors.text && touched.text ? (<div>{errors.text}</div>) : null}
-          <Field 
-            component={TextField}
-            label="Edit Post"
-            multiline
-            maxRows={10}
-            fullWidth
-            name='value'
-            value={value}
-            onChange={changeText}
-          />
-          <br />
-          <Button
-            style={{marginTop: 10}}
-            variant="contained"
-            color="primary"
-            type="submit"
-          >Save
-          </Button>
-        </Form>
-        </>
-      }
-      </Formik>
+                {result}
+              
+          </Container>
+      </>
     )
-  })
-  
-  return(
-    <> 
-      <Container maxWidth="md">
-            <Typography variant="h5" component="h5">Edit Post</Typography>
+  }
 
-              {result}
-            
-        </Container>
-    </>
-  )
-}
-
-PostIdComponent.propTypes = {
-  post: PropTypes.arrayOf(
-      PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          userId: PropTypes.number.isRequired,
-          text: PropTypes.string.isRequired,
-      })
-  )
-}
+  PostIdComponent.propTypes = {
+    post: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            userId: PropTypes.number.isRequired,
+            text: PropTypes.string.isRequired,
+        })
+    )
+  }
 export default PostIdComponent;

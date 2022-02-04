@@ -21,7 +21,12 @@ router.get('/:postId/likes', asyncError(async (req, res) => {
 	res.send(await postService.getPostIdLikes(req.params.postId));
 }));
 
-router.post('/', asyncError(async (req, res) => {
+// router.post('/', asyncError(async (req, res) => {
+// 	await postService.addPost(req.body);
+// 	res.status(201).send('Created new article!');
+// }));
+router.post('/add', asyncError(async (req, res) => {
+	console.log(req.body);
 	await postService.addPost(req.body);
 	res.status(201).send('Created new article!');
 }));

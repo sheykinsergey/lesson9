@@ -78,14 +78,14 @@ export function Header(){
               }}
             >
                 <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/addarticle"><Typography textAlign="center">AddArticle</Typography></Link>
+                <Link to="/posts/add"><Typography textAlign="center">AddArticle</Typography></Link>
                   
 
                 </MenuItem>
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 3, display: { xs: 'none', md: 'flex' } }}>
-          <Link to="/addarticle" style={{ textDecoration: 'none' }}>
+          <Link to="/posts/add" style={{ textDecoration: 'none' }}>
             <Button
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >AddArticle
@@ -107,7 +107,7 @@ export function Header(){
             >
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                    <Link to="/profile/1" style={{ textDecoration: 'none' }}>Profile</Link>
+                    <Link to="/profile/8" style={{ textDecoration: 'none' }}>Profile</Link>
                   </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseUserMenu}>
