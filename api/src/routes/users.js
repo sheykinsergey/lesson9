@@ -12,7 +12,7 @@ router.get('/:id', asyncError(async (req, res) => {
     res.send(await usersService.getUserId(req.params.id))
 }));
 
-router.post('/', asyncError(async (req, res) => {
+router.post('/add', asyncError(async (req, res) => {
     await usersService.addUser(req.body)
     res.send('Created new user!')
 }));

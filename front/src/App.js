@@ -11,6 +11,7 @@ import UsersContainer from "./containers/users/users"
 import UserContainer from "./containers/users/user"
 import PostIdContainer from "./containers/post/postId";
 
+
 import {
   BrowserRouter,
   Routes,
@@ -18,7 +19,6 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
-import EditPost from "./components/post/modal/modal";
 
 
 
@@ -40,6 +40,8 @@ function App() {
             <Route path="users/:id" element={<UserContainer />} />
             <Route path="profile/user" element={<ProfileUserCon/>} />
             <Route path="posts/:id" element={<PostIdContainer />} />
+
+            <Route path="posts/add" element={<AddArticle />} />
             {/* <Route path="articlestr/:str" element={<PostSTR />} />
             <Route path="articlefile/:file" element={<PostFILE />} />
             <Route path="articledata/:data" element={<PostDATA />} /> */}
