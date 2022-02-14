@@ -15,20 +15,27 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CardMedia from '@mui/material/CardMedia';
 
 const PostComponent = ({ initPost }) => {
-
+        
         const [modalActive, setModalActive] = useState(false);
         const showEditForm = () => {
             setModalActive(true)
         }
 
-        const result = initPost.map(({ id, userId, date, text }) => {
+        const result = initPost.map(({ id, userId, date, text, file }) => {
+            const avatarImage = `http://localhost:3001/uploads/${userId}/avatar.jpg`
+            const image = `http://localhost:3001/imgPost/${userId}/${file}`
             return (
                 <Card key={id} sx={{ maxWidth: 700 }} style={{marginTop: 10}}>
                     <CardHeader
                         avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">R</Avatar>
+                        <Avatar 
+                            src={avatarImage}
+                            sx={{ width: 50, height: 50 }}
+                        >
+                        </Avatar>
                         }
                         action={
                         <>
@@ -45,9 +52,19 @@ const PostComponent = ({ initPost }) => {
                     />
 
                     <CardContent>
+                        {file ? 
+                            <Card sx={{ maxWidth: 150 }}>
+                            <CardMedia
+                                component="img"
+                                image={image}
+                                /> 
+                                </Card>
+                                : null
+                        }
                         <Typography variant="body2" color="text.secondary" >
                         {text}
                         </Typography>
+                        
                     </CardContent>
                     <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
@@ -77,6 +94,7 @@ const PostComponent = ({ initPost }) => {
                 userId: PropTypes.number.isRequired,
                 text: PropTypes.string.isRequired,
                 date: PropTypes.string.isRequired,
+                visibility: PropTypes.string.isRequired
             })
         )
     }

@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use('/uploads', express.static(__dirname + '../../uploads'));
+app.use('/imgPost', express.static(__dirname + '../../imgPost'));
 
 app.use('/users', userRoutes);
 app.use('/posts', postsRoutes);
