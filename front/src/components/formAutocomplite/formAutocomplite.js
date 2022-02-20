@@ -12,7 +12,8 @@ const FormAutocomplite = (props) => {
       {...props}
       {...field}
       sx={{ width: 150 }}
-      getOptionLabel={option => option.label ? option.label : value} 
+      getOptionLabel={option => option.label ? option.label : value}
+      isOptionEqualToValue={ (option, value) => option.value === value.value }
       onChange={ (_, {value}) =>{ setFieldValue(name, value)} }
       onBlur={ () => setTouched({ [name]: true })}
       renderInput={ props => 

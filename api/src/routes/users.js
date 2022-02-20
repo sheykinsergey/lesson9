@@ -1,15 +1,13 @@
 const router = require('express').Router();
 const usersService = require('../services/store/user.service');
 const asyncError = require('../middlewares/asyncError');
-// const asyncHandler = require('express-async-handler')
-
 
 router.get('/', asyncError(async (req, res) => {
     res.send(await usersService.getAllUsers())
 }));
 
 router.get('/:id', asyncError(async (req, res) => {
-    res.send(await usersService.getUserId(req.params.id))
+    res.send(await usersService.getId(req.params.id))
 }));
 
 router.post('/add', asyncError(async (req, res) => {

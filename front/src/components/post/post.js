@@ -24,7 +24,7 @@ const PostComponent = ({ initPost }) => {
             setModalActive(true)
         }
 
-        const result = initPost.map(({ id, userId, date, text, file }) => {
+        const result = initPost.map(({ id, userId, date, text, vis, file }) => {
             const avatarImage = `http://localhost:3001/uploads/${userId}/avatar.jpg`
             const image = `http://localhost:3001/imgPost/${userId}/${file}`
             return (
@@ -94,7 +94,7 @@ const PostComponent = ({ initPost }) => {
                 userId: PropTypes.number.isRequired,
                 text: PropTypes.string.isRequired,
                 date: PropTypes.string.isRequired,
-                visibility: PropTypes.string.isRequired
+                vis: PropTypes.string.isRequired
             })
         )
     }

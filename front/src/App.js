@@ -10,6 +10,7 @@ import { ProfileUserCon } from "./containers/ProfileUser/ProfileUser"
 import UsersContainer from "./containers/users/users"
 import UserContainer from "./containers/users/user"
 import PostIdContainer from "./containers/post/postId";
+import AuthContainer from "./containers/auth/auth";
 
 
 import {
@@ -31,6 +32,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Body />}/>
+            <Route path='/auth' element={<AuthContainer />} />
             <Route path="addArticle" element={<AddArticle />} />
             <Route path="posts" element={<PostContainer />} />
             {/* <Route path="posts/:id" element={<EditPost />} /> */}
