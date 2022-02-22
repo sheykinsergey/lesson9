@@ -28,8 +28,9 @@ module.exports = {
     }
     return {};
   },
-  authorizeById: async (token) => {
-    const user = await getUserId(token);
+  authorizeById: async (user_id) => {
+    
+    const user = await getUserId(user_id);
 
     if (user) {
       const accessToken = jwt.sign(

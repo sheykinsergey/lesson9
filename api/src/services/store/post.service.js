@@ -5,7 +5,8 @@ module.exports ={
   getPostId: async (postId) => db.select().from('posts').where({id: postId}),
   getPostIdComments: async (postId) => db.select().from('comments').where({ id: postId }),
   getPostIdLikes: async (postId) => db.select().from('postsLikes').where({ postId: postId }),
-  addPost: async (body, file) => db.insert({userId: body.userId, date: body.date, text: body.text, vis: body.visibility, file: file.filename}).into('posts'),
+  addPost: async (body) => db.insert({userId: body.userId, date: body.date, text: body.text, vis: body.visibility}).into('posts'),
+  addPostAndImage: async (body, file) => db.insert({userId: body.userId, date: body.date, text: body.text, vis: body.visibility, file: file.filename}).into('posts'),
   updatePost: async (id, body) => db.select().from('posts').where({ id: id }).update({text: body.text, date: body.date, vis: body.visibility, file: body.file}),
   deletePost: async (postId) => db.select().from('posts').where({ id: postId }).del()
 }

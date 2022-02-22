@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const imgPost = require('./imgPost')
 const editImgPost = require('./editImgPost')
 
-router.get('/', authMiddleware, asyncError(async (req, res) => {
+router.get('/', asyncError(async (req, res) => {
 	res.send(await postService.getAllPosts());
 }));
 
@@ -23,7 +23,9 @@ router.get('/:postId/likes', asyncError(async (req, res) => {
 }));
 
 router.post('/add', imgPost.single('imgPost'), (req, res, next) => {
-	postService.addPost(req.body, req.file);
+	console.log('req.auth');
+	console.log(req.headers.authorization);
+	{req.file ? postService.addPostAndImage(req.body, req.file) : postService.addPost(req.body)}
 	res.status(201).send('Created new article!');
 });
 

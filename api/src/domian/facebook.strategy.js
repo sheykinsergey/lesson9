@@ -1,13 +1,9 @@
 const FacebookTokenStrategy = require('passport-facebook-token')
 const passport = require('passport')
 const config = require('../services/config')
-
 const { getUserEmail } = require('./user')
 const {createUser} = require('../services/store/user.service')
 
-
-module.exports = () => {
-  const fRegisterStrategy = () => {
     passport.use(
       new FacebookTokenStrategy(
         {
@@ -35,7 +31,5 @@ module.exports = () => {
         },
       ),
     );
-  };
 
-  return { fRegisterStrategy, passport };
-};
+module.exports = passport;

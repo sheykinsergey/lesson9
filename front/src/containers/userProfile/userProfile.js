@@ -14,7 +14,6 @@ export function UserProfileCon(){
 
     return(
         <>
-            <Header />
             <UserProfile user={user} mutate={mutate} id={id} mutateAvatar={mutateAvatar}/>
         </>
     )

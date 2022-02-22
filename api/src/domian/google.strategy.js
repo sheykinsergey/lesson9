@@ -4,8 +4,6 @@ const config = require('../services/config')
 const { getUserEmail } = require('./user')
 const {createUser} = require('../services/store/user.service')
 
-  module.exports = () => {
-  const registerStrategy = () => {
     passport.use(
       new GoogleTokenStrategy(
         {
@@ -21,10 +19,12 @@ const {createUser} = require('../services/store/user.service')
             await createUser({
               name: profile.displayName,  
               email,
+
             });
             user = await getUserEmail(email);
           }
-
+          console.log('id');
+          console.log(user);
           return done(null,{
             id: user.id,
             name: user.name,
@@ -33,7 +33,7 @@ const {createUser} = require('../services/store/user.service')
         },
       ),
     );
-  };
-
-  return { registerStrategy, passport };
-};
+    passport.serializeUser(function(user, done) {
+      done(null, user);
+    });
+    module.exports = passport

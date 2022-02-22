@@ -30,18 +30,20 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
         <BrowserRouter>
+          <Body />
           <Routes>
-            <Route path="/" element={<Body />}/>
-            <Route path='/auth' element={<AuthContainer />} />
+            {/* <Route path="/" element={<Body />}/> */}
+            <Route path="/" element={<AuthContainer />}/>
+            {/* <Route path='/auth' element={<AuthContainer />} /> */}
             <Route path="addArticle" element={<AddArticle />} />
             <Route path="posts" element={<PostContainer />} />
-            {/* <Route path="posts/:id" element={<EditPost />} /> */}
+            <Route path="posts/:id" element={<PostIdContainer />} />
             <Route path="profile/:id" element={<UserProfileCon />} />
             {/* <Route path="users/:id" element={<UserProfileCon />} /> */}
             <Route path="users" element={<UsersContainer />} />
             <Route path="users/:id" element={<UserContainer />} />
             <Route path="profile/user" element={<ProfileUserCon/>} />
-            <Route path="posts/:id" element={<PostIdContainer />} />
+            
 
             <Route path="posts/add" element={<AddArticle />} />
             {/* <Route path="articlestr/:str" element={<PostSTR />} />

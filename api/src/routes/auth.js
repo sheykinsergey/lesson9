@@ -20,8 +20,11 @@ router.post('/refresh', asyncError(async (req, res) => {
 );
 
 router.post('/google', passport.authenticate("google-token", { session: false }), asyncError(async (req, res) => {
+    console.log('req.auth')
+    console.log(req.headers.authorization);
     const { accessToken, refreshToken } = await authorizeById(req.user.id);
-    
+    console.log('isAuthenticated: ', req.isAuthenticated())
+    console.log('Cookies: ', req.cookies)
     if (accessToken) {
       // res.cookie('session_id', accessToken,{
       //   maxAge: 3600,

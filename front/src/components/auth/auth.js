@@ -18,11 +18,11 @@ const AuthComponent = () => {
     axios.post(`${set.url}/auth/facebook`, {
       access_token: data.accessToken,
     })
-      .then((response) => {
+      .then((res) => {
         setAuth({
-          accessToken: response.data.accessToken,
-          refreshToken: response.data.refreshToken,
-          user: parseJwt(response.data.accessToken),
+          accessToken: res.data.accessToken,
+          refreshToken: res.data.refreshToken,
+          user: parseJwt(res.data.accessToken),
         });
       })
       .catch((error) => {
@@ -36,11 +36,11 @@ const AuthComponent = () => {
     axios.post(`${set.url}/auth/google`, {
       access_token: data.accessToken,
     })
-      .then((response) => {
+      .then((res) => {
         setAuth({
-          accessToken: response.data.accessToken,
-          refreshToken: response.data.refreshToken,
-          user: parseJwt(response.data.accessToken),
+          accessToken: res.data.accessToken,
+          refreshToken: res.data.refreshToken,
+          user: parseJwt(res.data.accessToken),
         });
       })
       .catch((error) => {
@@ -86,9 +86,19 @@ const AuthComponent = () => {
 export default AuthComponent;
 
 const parseJwt = (token) => {
-  try {
-    return JSON.parse(atob(token.split('.')[1]));
-  } catch (e) {
-    return null;
-  }
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
 };
+
+// const parseJwt = (token) => {
+//   try {
+//     return JSON.parse(atob(token.split('.')[1]));
+//   } catch (e) {
+//     return null;
+//   }
+// };

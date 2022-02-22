@@ -88,7 +88,7 @@ export const AddArticle = () => {
   
   return(
   <>
-  <Header />
+
   <Container maxWidth="md">
   <Typography variant="h5" component="h5">Add Post</Typography>
     <Formik
