@@ -14,7 +14,7 @@ const UserContainer = () => {
 
   return (
     <>
-      <Header />
+
 
       <UserComponent user={user} />
     </>

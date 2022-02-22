@@ -1,18 +1,10 @@
 const router = require('express').Router();
 const postService = require('../services/store/post.service');
 const asyncError = require('../middlewares/asyncError');
-const db = require('../services/db');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const imgPost = require('./imgPost')
 const editImgPost = require('./editImgPost')
-
-// router.post('/add', imgPost.single('imgPost'),  (req, res, next) => {
-//   console.log(req.file);
-//   if(!req.file){
-//       res.send('error')
-//   }
-//   // res.redirect(303, `http://localhost:3000/profile/${req.params.id}`)
-// })
 
 router.get('/', asyncError(async (req, res) => {
 	res.send(await postService.getAllPosts());
@@ -31,20 +23,18 @@ router.get('/:postId/likes', asyncError(async (req, res) => {
 }));
 
 router.post('/add', imgPost.single('imgPost'), (req, res, next) => {
-	postService.addPost(req.body, req.file);
+	console.log('req.auth');
+	console.log(req.headers.authorization);
+	{req.file ? postService.addPostAndImage(req.body, req.file) : postService.addPost(req.body)}
 	res.status(201).send('Created new article!');
 });
 
-// router.put('/:postId', imgPost.single('imgPost'), (req, res, next) => { 
-// 	postService.updatePost(req.params.postId, req.body);
-// 	res.status(200).send('Post updated!');
-// });
 router.put('/:postId', asyncError(async (req, res) => {
 	await postService.updatePost(req.params.postId, req.body);
 	res.status(200).send('Post updated!');
 }));
 
-router.post('/:id', editImgPost.single('imgPost'), (req, res, next) => { 
+router.post('/:id', editImgPost.single('imgPost'), (req, res, next) => {
 	res.status(200).send('Post image updated!');
 });
 

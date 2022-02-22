@@ -8,7 +8,7 @@ const UsersContainer = () => {
   const users = data?.data || []
   return (
     <>
-      <Header />
+
 
       <UsersComponent initUsers={users}/>
     </>

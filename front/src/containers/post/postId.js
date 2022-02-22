@@ -16,7 +16,7 @@ const PostIdContainer = () => {
   
   return (
     <>
-      <Header />
+
       <PostIdComponent post={post} mutate={mutate} mutateImgPost={mutateImgPost}/>
     </>
   )

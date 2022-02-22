@@ -17,7 +17,7 @@ import "cropperjs/dist/cropper.css";
 
   const PostIdComponent = ({post, mutate, mutateImgPost}) => {
     
-    const result = post.map(({id, userId, text, date, visibility, file})=>{
+    const result = post.map(({id, userId, text, date, vis, file})=>{
 
       // const id = 8
       const img = /^image+\/(jpg|jpeg)$/
@@ -28,21 +28,22 @@ import "cropperjs/dist/cropper.css";
       const [imageToBlob, setImageToBlob] = useState();
       const [fileName, setFileName] = useState();
       const [imagePost, setImagePost] = useState(`http://localhost:3001/imgPost/${userId}/${file}`)
-      
-      console.log(fileName);
-      // console.log(imagePost);
+      const [editFileName, setEditFileName] = useState()
       
       const handleChange = e => {
         e.preventDefault();
-        const file = e.target.files[0]
+        const f = e.target.files[0]
+        console.log(f);
         
-        if(file.type.match(img) && file.size < sizeFile){
+        if(f.type.match(img) && f.size < sizeFile){
             const reader = new FileReader()
             reader.onload = () => {
                 setImage(reader.result)
             }
-            reader.readAsDataURL(file)
-            setFileName(file.name)
+            reader.readAsDataURL(f)
+            setFileName(f.name)
+            // file = f.name
+            setEditFileName(f.name)
         }else{
             console.error("Wrong file format or size")
         }
@@ -60,10 +61,9 @@ import "cropperjs/dist/cropper.css";
           setImage(null)
       }
 
-      // const mutationFoto = useMutation((data) => setUpdateImgPost(data));
-
       const onFormSubmit = (data, actions) => {
         actions.setSubmitting(true);
+        console.log({data});
         mutate({data})
         if (croppedImage) {
 
@@ -82,8 +82,8 @@ import "cropperjs/dist/cropper.css";
         userId: Yup.number().positive().required(),
         text: Yup.string().min(3, 'Too Short!').required('must be required'),
         date: Yup.string().required('must be required'),
-        visibility: Yup.string().required('must be required'),
-        fileName: Yup.string().required('must be required')
+        vis: Yup.string().required('must be required'),
+        // fileName: Yup.string()
       })
       const options = [
         {value: 'all', label: 'All'},
@@ -93,7 +93,7 @@ import "cropperjs/dist/cropper.css";
       return (
         <Formik 
           key={id}
-          initialValues={{id, userId, text, date, visibility, file}}
+          initialValues={{id, userId, text, date, vis, file}}
           validationSchema={schema}
           onSubmit={onFormSubmit}
         >
@@ -122,15 +122,20 @@ import "cropperjs/dist/cropper.css";
             />
             <Field
               component={FormAutocomplite}
-              name="visibility"
+              name="vis"
               label="Visible to"
               options={options}
             />
+            <Field
+              component={TextField}
+              name='file'
+            />
+
             <Box margin={1}>
               <img width="100" src={croppedImage ? croppedImage : null} />
             </Box>
           <Box marginTop={1} >
-                        <input type='text' name='filename' value={fileName}/>
+                        
                     {!image &&<Button variant="contained" component='label'>
                     Choose image
                         <input type='file' name='imgPost' hidden onChange={handleChange}/>
@@ -182,7 +187,7 @@ import "cropperjs/dist/cropper.css";
             userId: PropTypes.number.isRequired,
             text: PropTypes.string.isRequired,
             date: PropTypes.string.isRequired,
-            visibility: PropTypes.string.isRequired
+            vis: PropTypes.string.isRequired
         })
     )
   }

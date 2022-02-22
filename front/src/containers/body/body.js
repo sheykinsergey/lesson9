@@ -6,7 +6,6 @@ export function Body(){
   return(
     <>
       <Header />
-      <PostContainer />
     </>    
   );
 }
