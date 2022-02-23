@@ -7,6 +7,7 @@ router.get('/', asyncError(async (req, res) => {
 }));
 
 router.get('/:id', asyncError(async (req, res) => {
+    console.log(req.headers);
     res.send(await usersService.getId(req.params.id))
 }));
 

@@ -26,10 +26,10 @@ router.post('/google', passport.authenticate("google-token", { session: false })
     console.log('isAuthenticated: ', req.isAuthenticated())
     console.log('Cookies: ', req.cookies)
     if (accessToken) {
-      // res.cookie('session_id', accessToken,{
-      //   maxAge: 3600,
-      //   httpOnly: true
-      // })
+      res.cookie('session_id', accessToken, {
+        maxAge: 360000,
+        httpOnly: true
+      })
       return res.send({
         accessToken: accessToken,
         refreshToken: refreshToken,

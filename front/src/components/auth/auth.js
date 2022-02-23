@@ -8,7 +8,9 @@ const AuthComponent = () => {
 
   const [auth, setAuth] = useState({});
   useEffect(() => {
-    const localStorageAuth = localStorage.getItem('auth');
+    const localStorageAuth = localStorage.getItem(auth);
+    console.log('localStorageAuth');
+    console.log(localStorageAuth);
     if (localStorageAuth) {
       setAuth(JSON.parse(localStorageAuth));
     }
@@ -37,6 +39,7 @@ const AuthComponent = () => {
       access_token: data.accessToken,
     })
       .then((res) => {
+        // setAuth(res.data)
         setAuth({
           accessToken: res.data.accessToken,
           refreshToken: res.data.refreshToken,
@@ -77,8 +80,10 @@ const AuthComponent = () => {
   return (
     <div>
       <div>authorized</div>
-      <div>{auth.user.user_id}</div>
-      <div>{auth.user.Fullname}</div>
+      <div>user: id {auth.user.user_id}</div>
+      <div>name: {auth.user.Fullname}</div>
+      <div>accessToken: {auth.accessToken}</div>
+      <div>refreshToken: {auth.refreshToken}</div>
     </div>
   );
 };
